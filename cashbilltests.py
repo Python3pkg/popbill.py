@@ -24,9 +24,9 @@ class CashbillServiceTestCase(unittest.TestCase):
 
     def test_getChargeInfo(self):
         chrgInfo = self.cashbillService.getChargeInfo(self.testCorpNum, self.testUserID)
-        print(chrgInfo.unitCost)
-        print(chrgInfo.rateSystem)
-        print(chrgInfo.chargeMethod)
+        print((chrgInfo.unitCost))
+        print((chrgInfo.rateSystem))
+        print((chrgInfo.chargeMethod))
 
     def test_search(self):
         DType = "R"
@@ -43,10 +43,10 @@ class CashbillServiceTestCase(unittest.TestCase):
 
         try:
             result = self.cashbillService.search(self.testCorpNum,DType,SDate,EDate,State,TradeType,TradeUsage,TaxationType,Page,PerPage,Order,self.testUserID,QString)
-            print(result.total)
+            print((result.total))
             self.assertEqual(result.code, 1, "등록 오류 : " + result.message)
         except PopbillException as PE:
-            print(PE.message)
+            print((PE.message))
 
     def test_registIssue(self):
 
@@ -76,15 +76,15 @@ class CashbillServiceTestCase(unittest.TestCase):
             result = self.cashbillService.registIssue(self.testCorpNum,cashbill,"발행메모")
             self.assertEqual(result.code, 1, "등록 오류 : " + result.message)
         except PopbillException as PE:
-            print(PE.message)
+            print((PE.message))
 
     def test_getInfos(self):
         infos = self.cashbillService.getInfos(self.testCorpNum,["20150707-01","20150706-01"])
         for info in infos:
-            print("info : %s" % info.mgtKey)
-            for key, value in info.__dict__.items():
+            print(("info : %s" % info.mgtKey))
+            for key, value in list(info.__dict__.items()):
                 if not key.startswith("__"):
-                    print("     %s : %s" % (key,value))
+                    print(("     %s : %s" % (key,value)))
         self.assertGreater(len(infos),0,"갯수 확인")
 
     def test_getBalance(self):
@@ -107,7 +107,7 @@ class CashbillServiceTestCase(unittest.TestCase):
     def test_getURL(self):
         url = self.cashbillService.getURL(self.testCorpNum,self.testUserID,"PBOX")
         self.assertEqual(url[:5], "https","https로 시작")
-        print("PBOX url : " + url)
+        print(("PBOX url : " + url))
 
     def test_getUnitCost(self):
         unitCost = self.cashbillService.getUnitCost(self.testCorpNum)
@@ -152,7 +152,7 @@ class CashbillServiceTestCase(unittest.TestCase):
             result = self.cashbillService.register(self.testCorpNum,cashbill)
             self.assertEqual(result.code, 1, "등록 오류 : " + result.message)
         except PopbillException as PE:
-            print(PE.message)
+            print((PE.message))
 
     def test_02_update(self):
         cashbill = Cashbill(mgtKey = "20150325-01",
@@ -181,17 +181,17 @@ class CashbillServiceTestCase(unittest.TestCase):
         try:
             result = self.cashbillService.update(self.testCorpNum, '20150325-01', cashbill)
             self.assertEqual(result.code, 1, "수정 오류 : " + result.message)
-            print(result.message)
+            print((result.message))
         except PopbillException as PE:
-            print(PE.message)
+            print((PE.message))
 
     def test_03_issue(self):
         try:
             result = self.cashbillService.issue(self.testCorpNum, '20150325-01', "발행메모")
             self.assertEqual(result.code, 1, "발행 오류 : " + result.message)
-            print(result.message)
+            print((result.message))
         except PopbillException as PE:
-            print(PE.message)
+            print((PE.message))
 
     def test_04_cancelIssue(self):
         result = self.cashbillService.cancelIssue(self.testCorpNum, "20150325-01", "발행취소 메모1")
@@ -199,12 +199,12 @@ class CashbillServiceTestCase(unittest.TestCase):
 
     def test_05_getInfo(self):
             result = self.cashbillService.getInfo(self.testCorpNum, "20150325-01")
-            print(result.itemKey)
+            print((result.itemKey))
             self.assertEqual(result.mgtKey, "20150325-01","getInfo 오류 :" + str(result.message))
 
     def test_06_getDetailInfo(self):
             result = self.cashbillService.getDetailInfo(self.testCorpNum, "20150325-01")
-            print(result.smssendYN)
+            print((result.smssendYN))
             self.assertEqual(result.mgtKey, "20150325-01", "getDetail오류 :" + str(result.message))
 
     def test_07_sendEmail(self):
@@ -225,33 +225,33 @@ class CashbillServiceTestCase(unittest.TestCase):
 
     def test_10_getLogs(self):
         result = self.cashbillService.getLogs(self.testCorpNum, "20150325-01")
-        print(result[0].log)
+        print((result[0].log))
 
     def test_12_getPopUpURL(self):
         url = self.cashbillService.getPopUpURL(self.testCorpNum, "20150325-01", self.testUserID)
         self.assertEqual(url[:5], "https", "https로 시작 ")
-        print("PopupURL : " + url)
+        print(("PopupURL : " + url))
 
     def test_13_getPrintURL(self):
         url = self.cashbillService.getPrintURL(self.testCorpNum, "20150325-01", self.testUserID)
         self.assertEqual(url[:5], "https", "https로 시작 ")
-        print("Print URL : " + url)
+        print(("Print URL : " + url))
 
     def test_14_getEPrintURL(self):
         url = self.cashbillService.getEPrintURL(self.testCorpNum, "20150325-01", self.testUserID)
         self.assertEqual(url[:5], "https", "https로 시작 ")
-        print("EPRINT url : " + url)
+        print(("EPRINT url : " + url))
 
     def test_15_getMailURL(self):
         url = self.cashbillService.getMailURL(self.testCorpNum, "20150325-01", self.testUserID)
         self.assertEqual(url[:5], "https", "https로 시작 ")
-        print("mailURL : " + url)
+        print(("mailURL : " + url))
 
     def test_16_getMassPrintURL(self):
         MgtKeyList = ["20150225-02", "20150320-01", "20150320-03"]
         url = self.cashbillService.getMassPrintURL(self.testCorpNum, MgtKeyList, self.testUserID)
         self.assertEqual(url[:5], "https", "https로 시작 ")
-        print("PopupURL : " + url)
+        print(("PopupURL : " + url))
 
     def test_99_delete(self):
         result = self.cashbillService.delete(self.testCorpNum, "20150325-01")

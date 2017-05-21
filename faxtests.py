@@ -23,9 +23,9 @@ class FaxServiceTestCase(unittest.TestCase):
 
     def test_getChargeInfo(self):
         chrgInfo = self.faxService.getChargeInfo(self.testCorpNum, self.testUserID)
-        print(chrgInfo.unitCost)
-        print(chrgInfo.chargeMethod)
-        print(chrgInfo.rateSystem)
+        print((chrgInfo.unitCost))
+        print((chrgInfo.chargeMethod))
+        print((chrgInfo.rateSystem))
 
     def test_search(self):
         SDate = "20160601"
@@ -38,7 +38,7 @@ class FaxServiceTestCase(unittest.TestCase):
         Order = "D"
 
         response = self.faxService.search(self.testCorpNum,SDate,EDate,State,ReserveYN,SenderOnly,Page,PerPage,Order,self.testUserID)
-        print(response.list[1].fileNames[0])
+        print((response.list[1].fileNames[0]))
 
     def test_01_getURL(self):
         url = self.faxService.getURL(self.testCorpNum,self.testUserID,"BOX")
@@ -67,9 +67,9 @@ class FaxServiceTestCase(unittest.TestCase):
 
         result = self.faxService.getFaxResult(self.testCorpNum, receiptNum, self.testUserID)
 
-        print(result[0].sendState)
-        print(result[0].convState)
-        print(result[0].sendResult)
+        print((result[0].sendState))
+        print((result[0].convState))
+        print((result[0].sendResult))
 
     def test_04_reserveCancel(self):
 
@@ -90,7 +90,7 @@ class FaxServiceTestCase(unittest.TestCase):
         try:
             result = self.faxService.cancelReserve(self.testCorpNum, "015032513303900002")
         except PopbillException as PE:
-            print(PE.message)
+            print((PE.message))
 
 
     def test_05_sendFax(self):

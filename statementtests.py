@@ -25,9 +25,9 @@ class StatementServiceTestCase(unittest.TestCase):
     def test_getChargeInfo(self):
         ItemCode = "126"
         chrgInfo = self.statementService.getChargeInfo(self.testCorpNum, ItemCode, self.testUserID)
-        print(chrgInfo.rateSystem)
-        print(chrgInfo.unitCost)
-        print(chrgInfo.chargeMethod)
+        print((chrgInfo.rateSystem))
+        print((chrgInfo.unitCost))
+        print((chrgInfo.chargeMethod))
 
     def test_attachStatement(self):
         ItemCode = "121"
@@ -35,7 +35,7 @@ class StatementServiceTestCase(unittest.TestCase):
         SubItemCode = "121"
         SubMgtKey = "fbrdavxpsn"
         response = self.statementService.attachStatement(self.testCorpNum,ItemCode,MgtKey,SubItemCode,SubMgtKey,self.testUserID)
-        print(response.message)
+        print((response.message))
 
     def test_detachStatement(self):
         ItemCode = "121"
@@ -43,7 +43,7 @@ class StatementServiceTestCase(unittest.TestCase):
         SubItemCode = "121"
         SubMgtKey = "fbrdavxpsn"
         response = self.statementService.detachStatement(self.testCorpNum,ItemCode,MgtKey,SubItemCode,SubMgtKey,self.testUserID)
-        print(response.message)
+        print((response.message))
 
     def test_search(self):
         DType = "W"
@@ -57,7 +57,7 @@ class StatementServiceTestCase(unittest.TestCase):
         QString = ""
 
         response = self.statementService.search(self.testCorpNum,DType,SDate,EDate,State,ItemCode,Page,PerPage,Order,self.testUserID,QString)
-        print(response.total)
+        print((response.total))
 
     def test_FAXSend(self):
         statement = Statement(writeDate = "20160725",
@@ -187,15 +187,15 @@ class StatementServiceTestCase(unittest.TestCase):
 
         Memo = "즉시발행 메모"
         result = self.statementService.registIssue(self.testCorpNum, statement, Memo, self.testUserID)
-        print(result.message)
+        print((result.message))
 
     def test_getInfos(self):
         infos = self.statementService.getInfos(self.testCorpNum,121,["20150707-01","20150706-01"])
         for info in infos:
-            print("info : %s" % info.mgtKey)
-            for key, value in info.__dict__.items():
+            print(("info : %s" % info.mgtKey))
+            for key, value in list(info.__dict__.items()):
                 if not key.startswith("__"):
-                    print("     %s : %s" % (key,value))
+                    print(("     %s : %s" % (key,value)))
         self.assertGreater(len(infos),0,"갯수 확인")
 
     def test_getBalance(self):
@@ -221,7 +221,7 @@ class StatementServiceTestCase(unittest.TestCase):
 
     def test_getURL(self):
         url = self.statementService.getURL(self.testCorpNum,self.testUserID,"TBOX")
-        print("TBOX URL = "+url)
+        print(("TBOX URL = "+url))
         self.assertEqual(url[:5], "https","https로 시작")
 
     def test_getUnitCost(self):
@@ -376,12 +376,12 @@ class StatementServiceTestCase(unittest.TestCase):
 
     def test_05_getInfo(self):
             result = self.statementService.getInfo(self.testCorpNum, 121, "20150325-01")
-            print(result.itemCode)
+            print((result.itemCode))
             self.assertEqual(result.itemCode, 121, "getInfo오류 :" + str(result.message))
 
     def test_06_getDetailInfo(self):
             result = self.statementService.getDetailInfo(self.testCorpNum, 121, "20150325-01")
-            print(result.propertyBag.Balance)
+            print((result.propertyBag.Balance))
             self.assertEqual(result.mgtKey, "20150325-01", "getDetail오류 :" + str(result.message))
 
     def test_07_sendEmail(self):
@@ -402,7 +402,7 @@ class StatementServiceTestCase(unittest.TestCase):
 
     def test_10_getLogs(self):
         result = self.statementService.getLogs(self.testCorpNum, 121, "20150325-01")
-        print(result[3].procMemo)
+        print((result[3].procMemo))
 
     def test_021_attachFile(self):
         result = self.statementService.attachFile(self.testCorpNum, 121, "20150325-01", "test.jpeg")
@@ -410,35 +410,35 @@ class StatementServiceTestCase(unittest.TestCase):
 
     def test_022_getFilesAndDelete(self):
         result = self.statementService.getFiles(self.testCorpNum, 121, "20150325-01")
-        print(result[0].attachedFile)
+        print((result[0].attachedFile))
 
         result2 = self.statementService.deleteFile(self.testCorpNum, 121, "20150325-01", result[0].attachedFile)
         self.assertEqual(result2.code,1, "첨부파일 삭제오류 : "+result2.message)
 
     def test_023_getPopUpURL(self):
         url = self.statementService.getPopUpURL(self.testCorpNum, 121, "20150325-01", self.testUserID)
-        print("popup url : "+url)
+        print(("popup url : "+url))
         self.assertEqual(url[:5], "https", "https로 시작 ")
 
     def test_024_getPrintURL(self):
         url = self.statementService.getPrintURL(self.testCorpNum, 121, "20150325-01", self.testUserID)
-        print("print url : "+url)
+        print(("print url : "+url))
         self.assertEqual(url[:5], "https", "https로 시작 ")
 
     def test_025_getEPrintURL(self):
         url = self.statementService.getEPrintURL(self.testCorpNum, 121, "20150325-01", self.testUserID)
-        print("Eprint url : "+url)
+        print(("Eprint url : "+url))
         self.assertEqual(url[:5], "https", "https로 시작 ")
 
     def test_026_getMailURL(self):
         url = self.statementService.getMailURL(self.testCorpNum, 121, "20150325-01", self.testUserID)
-        print("Mail url : "+url)
+        print(("Mail url : "+url))
         self.assertEqual(url[:5], "https", "https로 시작 ")
 
     def test_027_getMassPrintURL(self):
         MgtKeyList = ["20150323-01", "20150319-01"]
         url = self.statementService.getMassPrintURL(self.testCorpNum, 121, MgtKeyList, self.testUserID)
-        print("Massprint url : "+url)
+        print(("Massprint url : "+url))
         self.assertEqual(url[:5], "https", "https로 시작 ")
 
     def test_99_delete(self):

@@ -25,11 +25,11 @@ class TaxinvoiceServiceTestCase(unittest.TestCase):
 
     def test_attachStmt(self):
         response = self.taxinvoiceService.attachStatement(self.testCorpNum, "SELL", "chzovl6d5u", "121", "fbrdavxpsn", self.testUserID)
-        print(response.message)
+        print((response.message))
 
     def test_detachStmt(self):
         response = self.taxinvoiceService.detachStatement(self.testCorpNum, "SELL", "chzovl6d5u", "121", "fbrdavxpsn", self.testUserID)
-        print(response.message)
+        print((response.message))
 
     def test_1_registIssue(self):
 
@@ -116,7 +116,7 @@ class TaxinvoiceServiceTestCase(unittest.TestCase):
         emailSubject = "즉시발행메일_20160725"
 
         result = self.taxinvoiceService.registIssue(self.testCorpNum, taxinvoice, writeSpecification, forceIssue, dealInvoiceMgtKey, memo, emailSubject, self.testUserID)
-        print(result.message)
+        print((result.message))
         self.assertEqual(result.code,1,"등록 오류 : " + result.message)
 
 
@@ -142,14 +142,14 @@ class TaxinvoiceServiceTestCase(unittest.TestCase):
             LateOnly,TaxRegIDYN,TaxRegIDType,TaxRegID,Page,PerPage,Order,self.testUserID,QString,InterOPYN)
 
         for info in response.list:
-            print(info.interOPYN)
+            print((info.interOPYN))
 
     def test_getInfos(self):
         infos = self.taxinvoiceService.getInfos(self.testCorpNum,"SELL",["1234","1234567890"])
         self.assertGreater(len(infos),0,"갯수 확인")
     def test_checkID(self):
         response = self.taxinvoiceService.checkID('testkorea')
-        print(response.message)
+        print((response.message))
 
     def test_registContact(self) :
         contactInfo = ContactInfo (
@@ -164,7 +164,7 @@ class TaxinvoiceServiceTestCase(unittest.TestCase):
                         mgrYN = True
                         )
         response = self.taxinvoiceService.registContact(self.testCorpNum, contactInfo, self.testUserID)
-        print(response.message)
+        print((response.message))
 
     def test_updateCorpInfo(self) :
         corpInfo = CorpInfo (
@@ -175,20 +175,20 @@ class TaxinvoiceServiceTestCase(unittest.TestCase):
                         bizClass = "업종_0725"
                         )
         response = self.taxinvoiceService.updateCorpInfo(self.testCorpNum, corpInfo, self.testUserID)
-        print(response.message)
+        print((response.message))
     def test_getCorpInfo(self):
         corpInfo = self.taxinvoiceService.getCorpInfo(self.testCorpNum, self.testUserID)
-        print(corpInfo.addr)
+        print((corpInfo.addr))
 
     def test_getChargeInfo(self):
         chrgInfo = self.taxinvoiceService.getChargeInfo(self.testCorpNum,self.testUserID)
-        print (chrgInfo.unitCost)
-        print (chrgInfo.rateSystem)
+        print((chrgInfo.unitCost))
+        print((chrgInfo.rateSystem))
 
 
     def test_listContact(self):
         contactList = self.taxinvoiceService.listContact(self.testCorpNum)
-        print (contactList[1].id)
+        print((contactList[1].id))
 
     def test_updateContact(self):
         contactInfo = ContactInfo(
@@ -201,7 +201,7 @@ class TaxinvoiceServiceTestCase(unittest.TestCase):
                             mgtYN = False
                             )
         response = self.taxinvoiceService.updateContact(self.testCorpNum, contactInfo, self.testUserID)
-        print (response.message)
+        print((response.message))
 
     def test_getBalance(self):
         balance = self.taxinvoiceService.getBalance(self.testCorpNum)
@@ -343,7 +343,7 @@ class TaxinvoiceServiceTestCase(unittest.TestCase):
                                 )
 
         result = self.taxinvoiceService.register(self.testCorpNum,taxinvoice)
-        print(result.message)
+        print((result.message))
         self.assertEqual(result.code,1,"등록 오류 : " + result.message)
 
     def test_update(self):
@@ -446,7 +446,7 @@ class TaxinvoiceServiceTestCase(unittest.TestCase):
 
     def test_getLogs(self):
         logs = self.taxinvoiceService.getLogs(self.testCorpNum,"SELL","1234")
-        print (logs[1].procMemo)
+        print((logs[1].procMemo))
         self.assertGreater(len(logs),0,"로그 갯수 확인")
 
 

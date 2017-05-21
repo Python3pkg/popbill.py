@@ -75,7 +75,7 @@ class HTTaxinvoiceServiceTestCase(unittest.TestCase):
     def test_getChrgInfo(self):
         chrgInfo = self.htTaxinvoiceService.getChargeInfo(self.testCorpNum, self.testUserID)
         self.assertIsNotNone(chrgInfo)
-        print("단가 : " +chrgInfo.unitCost)
+        print(("단가 : " +chrgInfo.unitCost))
 
 
     def test_requestJob(self):
@@ -84,7 +84,7 @@ class HTTaxinvoiceServiceTestCase(unittest.TestCase):
         SDate = "20160601"
         EDate = "20160831"
         jobID = self.htTaxinvoiceService.requestJob(self.testCorpNum, Type, DType, SDate, EDate, self.testUserID)
-        print("작업아이디 : " + jobID)
+        print(("작업아이디 : " + jobID))
         self.assertIsNotNone(jobID, "수집요청 작업아이디 확인")
 
     def test_getJobState(self):

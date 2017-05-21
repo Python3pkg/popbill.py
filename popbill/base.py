@@ -19,7 +19,7 @@ from collections import namedtuple
 try:
     import http.client as httpclient
 except ImportError:
-    import httplib as httpclient
+    import http.client as httpclient
 import mimetypes
 
 import linkhub
@@ -405,7 +405,7 @@ class PopbillEncoder(JSONEncoder):
 
 class Utils:
     @staticmethod
-    def _json_object_hook(d): return JsonObject(namedtuple('JsonObject', d.keys())(*d.values()))
+    def _json_object_hook(d): return JsonObject(namedtuple('JsonObject', list(d.keys()))(*list(d.values())))
 
     @staticmethod
     def json2obj(data):

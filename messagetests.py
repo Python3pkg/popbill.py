@@ -24,13 +24,13 @@ class MessageServiceTestCase(unittest.TestCase):
 
     def test_getChargeInfo(self):
         chrgInfo = self.messageService.getChargeInfo(self.testCorpNum, "MMS", self.testUserID)
-        print(chrgInfo.unitCost)
-        print(chrgInfo.chargeMethod)
-        print(chrgInfo.rateSystem)
+        print((chrgInfo.unitCost))
+        print((chrgInfo.chargeMethod))
+        print((chrgInfo.rateSystem))
 
     def test_getAutoDenyList(self):
         autoDenyList = self.messageService.getAutoDenyList(self.testCorpNum, self.testUserID)
-        print(autoDenyList[5].number)
+        print((autoDenyList[5].number))
 
     def test_getMessage(self):
         SDate = "20160601"
@@ -45,7 +45,7 @@ class MessageServiceTestCase(unittest.TestCase):
 
         info = self.messageService.search(self.testCorpNum, SDate, EDate, State, Item, ReserveYN, SenderYN, Page, PerPage, Order, self.testUserID)
         for i in range(1, 2):
-            print(info.list[i].receiveNum)
+            print((info.list[i].receiveNum))
 
     def test_01_getBalance(self):
         balance = self.messageService.getBalance(self.testCorpNum)
@@ -79,9 +79,9 @@ class MessageServiceTestCase(unittest.TestCase):
     def test_06_sendSMS_one(self):
         try:
             receiptNum = self.messageService.sendSMS(self.testCorpNum, "07075103710", "010000000", "수신자명","단건전송 내용", "", True)
-            print("sendSMS_one : " +receiptNum)
+            print(("sendSMS_one : " +receiptNum))
         except PopbillException as PE:
-            print(PE.message)
+            print((PE.message))
 
     def test_07_sendSMS(self):
         reserveDT = ''
@@ -125,9 +125,9 @@ class MessageServiceTestCase(unittest.TestCase):
         reserveDT = ''
         try:
                 receiptNum = self.messageService.sendLMS(self.testCorpNum, "07075103710", "010000000", "수신자명", "장문메시지 제목", "장문 메시지 내용", reserveDT, False)
-                print("sendLMS_one : "+ receiptNum)
+                print(("sendLMS_one : "+ receiptNum))
         except PopbillException as PE:
-            print(PE.message)
+            print((PE.message))
 
     def test_10_sendLMS(self):
         Subject = '동보전송 제목'
@@ -152,9 +152,9 @@ class MessageServiceTestCase(unittest.TestCase):
         try:
                 receiptNum = self.messageService.sendXMS(self.testCorpNum, "07075103710", "010000000", "수신자명", "메시지 제목",
                  "메시지 내용90Byte초과시 장문전송 메시지 내용90Byte초과시 장문전송 메시지 내용90Byte초과시 장문전송 메시지 내용90Byte초과시 장문전송", reserveDT, True)
-                print("sendXMS_one : "+ receiptNum)
+                print(("sendXMS_one : "+ receiptNum))
         except PopbillException as PE:
-            print(PE.message)
+            print((PE.message))
 
 
     def test_12_sendXMSnResult(self):
@@ -175,8 +175,8 @@ class MessageServiceTestCase(unittest.TestCase):
         print(receiptNum)
 
         result = self.messageService.getMessages(self.testCorpNum, receiptNum)
-        print(result[0].receiveName)
-        print(result[0].content)
+        print((result[0].receiveName))
+        print((result[0].content))
 
     def test_13_reserveSendnCancel(self):
 
@@ -201,7 +201,7 @@ class MessageServiceTestCase(unittest.TestCase):
             result = self.messageService.cancelReserve(self.testCorpNum, receiptNum)
             self.assertEqual(result.code,1,result.message + ", 예약취소 실패")
         except PopbillException as PE:
-            print(PE.message)
+            print((PE.message))
 
 
 
@@ -210,7 +210,7 @@ class MessageServiceTestCase(unittest.TestCase):
 
         url = self.messageService.getURL(self.testCorpNum, self.testUserID, 'BOX')
         self.assertEqual(url[:5], "https","https로 시작")
-        print("BOX URL : " +url)
+        print(("BOX URL : " +url))
 
     def test_15_sendMMS(self):
         Subject = "동보전송 제목"
@@ -222,7 +222,7 @@ class MessageServiceTestCase(unittest.TestCase):
             print(receiptNum)
 
         except PopbillException as PE:
-            print(PE.message)
+            print((PE.message))
 
     def test_16_sendMMS(self):
 
@@ -245,7 +245,7 @@ class MessageServiceTestCase(unittest.TestCase):
             print(receiptNum)
 
         except PopbillException as PE:
-            print(PE.message)
+            print((PE.message))
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(MessageServiceTestCase)

@@ -76,7 +76,7 @@ class HTCashbillServiceTestCase(unittest.TestCase):
         chrgInfo = self.htCashbillService.getChargeInfo(self.testCorpNum, self.testUserID)
         self.assertIsNotNone(chrgInfo)
 
-        print("단가 : " +chrgInfo.unitCost)
+        print(("단가 : " +chrgInfo.unitCost))
 
 
     def test_requestJob(self):
@@ -87,7 +87,7 @@ class HTCashbillServiceTestCase(unittest.TestCase):
         jobID = self.htCashbillService.requestJob(self.testCorpNum, Type, SDate, EDate, self.testUserID)
         self.assertIsNotNone(jobID, "수집 요청")
 
-        print ( "작업아이디(jobID) : " + jobID )
+        print(( "작업아이디(jobID) : " + jobID ))
 
 
     def test_getJobState(self):
@@ -203,7 +203,7 @@ class HTCashbillServiceTestCase(unittest.TestCase):
     def test_getCertificateExpireDate(self):
         expireDate = self.htCashbillService.getCertificateExpireDate(self.testCorpNum, self.testUserID)
         self.assertIsNotNone(expireDate)
-        print("CertificateExpireDate : " +expireDate)
+        print(("CertificateExpireDate : " +expireDate))
 
 
 if __name__ == '__main__':

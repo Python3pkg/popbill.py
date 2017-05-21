@@ -24,9 +24,9 @@ class ClosedownServiceTestCase(unittest.TestCase):
 
     def test_getChrgInfo(self):
         chrgInfo = self.closedownService.getChargeInfo(self.testCorpNum, self.testUserID)
-        print(chrgInfo.rateSystem)
-        print(chrgInfo.chargeMethod)
-        print(chrgInfo.unitCost)
+        print((chrgInfo.rateSystem))
+        print((chrgInfo.chargeMethod))
+        print((chrgInfo.unitCost))
 
     def test_getUnitCost(self):
         unitCost = self.closedownService.getUnitCost(self.testCorpNum)
@@ -78,10 +78,10 @@ class ClosedownServiceTestCase(unittest.TestCase):
         # type (사업 유형) : None-알수없음, 1-일반과세자, 2-면세과세자, 3-간이과세자, 4-비영리법인, 국가기관
 
         for info in resultList:
-            print("corpNum : %s" % info.corpNum)
-            for key, value in info.__dict__.items():
+            print(("corpNum : %s" % info.corpNum))
+            for key, value in list(info.__dict__.items()):
                 if not key.startswith("__"):
-                    print("     %s : %s" % (key,value))
+                    print(("     %s : %s" % (key,value)))
 
         self.assertGreater(len(resultList),0,"갯수 확인")
 
